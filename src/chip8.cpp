@@ -52,8 +52,15 @@ void Chip8::LoadROM(char const* filename)
 }
 
 
+const unsigned int FONTSET_START_ADDRESS = 0x50;
+
 Chip8::Chip8()
 {
 	// Initialize PC
 	pc = START_ADDRESS;
+
+	//load fonts into memory
+	for (unsigned int i=0l i< FONTSET_SIZE; i++){
+		memory[FONTSET_START_ADDRESS + i] = fontset[i];
+	}
 }
