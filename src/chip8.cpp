@@ -1,7 +1,8 @@
 #include <fstream>
 
-const unsigned int START_ADDRESS = 0x200;
 
+const unsigned int START_ADDRESS = 0x200;
+const unsigned int FONTSET_START_ADDRESS = 0x50;
 const unsigned int FONTSET_SIZE = 80;
 
 uint8_t fontset[FONTSET_SIZE] =
@@ -23,6 +24,20 @@ uint8_t fontset[FONTSET_SIZE] =
 	0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
 	0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 };
+
+
+Chip8::Chip8()
+{
+	// Initialize PC
+	pc = START_ADDRESS;
+
+	//load fonts into memory
+	for (unsigned int i=0l i< FONTSET_SIZE; i++){
+		memory[FONTSET_START_ADDRESS + i] = fontset[i];
+	}
+}
+
+
 
 void Chip8::LoadROM(char const* filename)
 {
@@ -48,19 +63,5 @@ void Chip8::LoadROM(char const* filename)
 
 		// Free the buffer
 		delete[] buffer;
-	}
-}
-
-
-const unsigned int FONTSET_START_ADDRESS = 0x50;
-
-Chip8::Chip8()
-{
-	// Initialize PC
-	pc = START_ADDRESS;
-
-	//load fonts into memory
-	for (unsigned int i=0l i< FONTSET_SIZE; i++){
-		memory[FONTSET_START_ADDRESS + i] = fontset[i];
 	}
 }
