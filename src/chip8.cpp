@@ -1,5 +1,6 @@
 #include <fstream>
-
+#include <chrono>
+#include <random>
 
 const unsigned int START_ADDRESS = 0x200;
 const unsigned int FONTSET_START_ADDRESS = 0x50;
