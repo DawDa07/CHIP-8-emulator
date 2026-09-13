@@ -66,3 +66,30 @@ void Chip8::LoadROM(char const* filename)
 		delete[] buffer;
 	}
 }
+
+void Chip8::OP_00E0()
+{
+	memset(video, 0, sizeof(video));
+}
+
+void Chip8::OP_00EE()
+{
+	--sp;
+	pc = stack[sp];
+}
+
+void Chip8::OP_1nnn()
+{
+	uint16_t address = opcode & 0x0FFFu;
+
+	pc = address;
+}
+
+void Chip8::OP_2nnn()
+{
+	uint16_t address = opcode & 0x0FFFu;
+
+	stack[sp] = pc;
+	++sp;
+	pc = address;
+}
